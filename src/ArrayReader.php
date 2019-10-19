@@ -2,6 +2,7 @@
 
 namespace Selective\ArrayReader;
 
+use Cake\Chronos\Chronos;
 use Exception;
 use InvalidArgumentException;
 
@@ -269,23 +270,18 @@ final class ArrayReader
      */
     public function find(string $path, $default = null)
     {
-        if (strpos($path, '.') === false) {
-            return $this->data[$path] ?? $default;
-        }
+        $pathKeys = explode('.', $path);
 
-        $parts = explode('.', $path);
-        $value = &$this->data;
+        $arrayCopyOrValue = $this->data;
 
-        foreach ($parts as $key) {
-            if (isset($value[$key])) {
-                $value = &$value[$key];
-            } else {
+        foreach ($pathKeys as $pathKey) {
+            if (!isset($arrayCopyOrValue[$pathKey])) {
                 return $default;
             }
+            $arrayCopyOrValue = $arrayCopyOrValue[$pathKey];
         }
-        $value = &$this->$value;
 
-        return $value;
+        return $arrayCopyOrValue;
     }
 
     /**
@@ -311,19 +307,15 @@ final class ArrayReader
      */
     public function exists(string $path): bool
     {
-        if (strpos($path, '.') === false) {
-            return array_key_exists($path, $this->data);
-        }
+        $pathKeys = explode('.', $path);
 
-        $parts = explode('.', $path);
+        $arrayCopyOrValue = $this->data;
 
-        $temp = &$this->data;
-        foreach ($parts as $key) {
-            if (array_key_exists($key, $temp)) {
-                $temp = &$this->data[$key];
-            } else {
+        foreach ($pathKeys as $pathKey) {
+            if (!array_key_exists($pathKey, $arrayCopyOrValue)) {
                 return false;
             }
+            $arrayCopyOrValue = $arrayCopyOrValue[$pathKey];
         }
 
         return true;
