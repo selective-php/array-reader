@@ -1,6 +1,6 @@
 <?php
 
-namespace Selective\Artifact\Test;
+namespace Selective\ArrayReader\Test;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
