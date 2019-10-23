@@ -32,6 +32,8 @@ final class ArrayReader
      * @param string $key The key
      * @param int|null $default The default value
      *
+     * @throws InvalidArgumentException
+     *
      * @return int The value
      */
     public function getInt(string $key, int $default = null): int
@@ -49,7 +51,7 @@ final class ArrayReader
      * Get value as integer or null.
      *
      * @param string $key The key
-     * @param int $default The default value
+     * @param int|null $default The default value
      *
      * @return int|null The value
      */
@@ -69,6 +71,8 @@ final class ArrayReader
      *
      * @param string $key The key
      * @param string|null $default The default value
+     *
+     * @throws InvalidArgumentException
      *
      * @return string The value
      */
@@ -108,6 +112,8 @@ final class ArrayReader
      * @param string $key The key
      * @param array|null $default The default value
      *
+     * @throws InvalidArgumentException
+     *
      * @return array The value
      */
     public function getArray(string $key, array $default = null): array
@@ -145,6 +151,8 @@ final class ArrayReader
      *
      * @param string $key The key
      * @param float|null $default The default value
+     *
+     * @throws InvalidArgumentException
      *
      * @return float The value
      */
@@ -184,6 +192,8 @@ final class ArrayReader
      * @param string $key The key
      * @param bool|null $default The default value
      *
+     * @throws InvalidArgumentException
+     *
      * @return bool The value
      */
     public function getBool(string $key, bool $default = null): bool
@@ -221,6 +231,8 @@ final class ArrayReader
      *
      * @param string $key The key
      * @param Chronos|null $default The default value
+     *
+     * @throws InvalidArgumentException
      *
      * @return Chronos The value
      */
