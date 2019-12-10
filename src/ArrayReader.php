@@ -40,7 +40,7 @@ final class ArrayReader
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
@@ -57,13 +57,13 @@ final class ArrayReader
      */
     public function findInt(string $key, int $default = null)
     {
-        $result = $this->find($key, $default);
+        $value = $this->find($key, $default);
 
-        if ($result === null) {
+        if ($this->isNullOrBlank($value)) {
             return null;
         }
 
-        return (int)$result;
+        return (int)$value;
     }
 
     /**
@@ -120,7 +120,7 @@ final class ArrayReader
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
@@ -139,7 +139,7 @@ final class ArrayReader
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             return null;
         }
 
@@ -160,7 +160,7 @@ final class ArrayReader
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
@@ -179,7 +179,7 @@ final class ArrayReader
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             return null;
         }
 
@@ -200,7 +200,7 @@ final class ArrayReader
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
@@ -219,7 +219,7 @@ final class ArrayReader
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             return null;
         }
 
@@ -240,7 +240,7 @@ final class ArrayReader
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
@@ -265,7 +265,11 @@ final class ArrayReader
     {
         $value = $this->find($key, $default);
 
-        if ($value === null || $value instanceof Chronos) {
+        if ($this->isNullOrBlank($value)) {
+            return null;
+        }
+
+        if ($value instanceof Chronos) {
             return $value;
         }
 
@@ -343,5 +347,17 @@ final class ArrayReader
     public function isEmpty(string $path): bool
     {
         return empty($this->find($path));
+    }
+
+    /**
+     * Is null or blank.
+     *
+     * @param mixed $value The value
+     *
+     * @return bool The status
+     */
+    private function isNullOrBlank($value): bool
+    {
+        return $value === null || $value === '';
     }
 }
