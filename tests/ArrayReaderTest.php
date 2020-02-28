@@ -115,4 +115,106 @@ class ArrayReaderTest extends TestCase
             [['key' => ['key2' => 'value']], 'key.nope', 'default', 'default'],
         ];
     }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetArray
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testGetArray($data, string $key, $default, $expected)
+    {
+        $reader = new ArrayReader($data);
+        static::assertSame($expected, $reader->getArray($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetArray(): array
+    {
+        return [
+            [[[1, 2, 3, 4], [2, 3, 4, 5, 6]], 0, null, [1, 2, 3, 4]],
+            [[[1, 2, 3, 4], [2, 3, 4, 5, 6]], 1, null, [2, 3, 4, 5, 6]],
+            [[['key' => 'value'], ['key2' => 'value2']], 0, null, ['key' => 'value']],
+            [[['key' => 'value'], ['key2' => 'value2']], 1, null, ['key2' => 'value2']],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetArrayError
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     *
+     * @return void
+     */
+    public function testGetArrayError($data, string $key, $default)
+    {
+        $reader = new ArrayReader($data);
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $reader->getArray($key, $default);
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetArrayError(): array
+    {
+        return [
+            [[[1, 2, 3, 4], [2, 3, 4, 5, 6]], 2, null],
+            [[['key' => 'value'], ['key2' => 'value2']], 2, null],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerFindArray
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testFindArray($data, string $key, $default, $expected)
+    {
+        $reader = new ArrayReader($data);
+        static::assertSame($expected, $reader->findArray($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerFindArray(): array
+    {
+        return [
+            [[[1, 2, 3, 4], [2, 3, 4, 5, 6]], 0, null, [1, 2, 3, 4]],
+            [[[1, 2, 3, 4], [2, 3, 4, 5, 6]], 1, null, [2, 3, 4, 5, 6]],
+            [[[1, 2, 3, 4], [2, 3, 4, 5, 6]], 2, [], []],
+            [[[1, 2, 3, 4], [2, 3, 4, 5, 6]], 2, null, null],
+            [[['key' => 'value'], ['key2' => 'value2']], 0, null, ['key' => 'value']],
+            [[['key' => 'value'], ['key2' => 'value2']], 1, null, ['key2' => 'value2']],
+            [[['key' => 'value'], ['key2' => 'value2']], 2, null, null],
+        ];
+    }
 }
