@@ -14,6 +14,109 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
+     * @dataProvider providerGetInt
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testGetInt($data, string $key, $default, $expected)
+    {
+        $reader = new ArrayReader($data);
+        static::assertSame($expected, $reader->getInt($key, $default));
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetIntError
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     *
+     * @return void
+     */
+    public function testGetIntError($data, string $key, $default)
+    {
+        $reader = new ArrayReader($data);
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $reader->getInt($key, $default);
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerFindInt
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testFindInt($data, string $key, $default, $expected)
+    {
+        $reader = new ArrayReader($data);
+        static::assertSame($expected, $reader->findInt($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetInt(): array
+    {
+        return [
+            [[0, 1, 2, 3], 0, null, 0],
+            [[0, 1, 2, 3], 1, null, 1],
+            [[0, 1, 2, 3], 2, null, 2],
+            [[0, 1, 2, 3], 3, null, 3],
+        ];
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetIntError(): array
+    {
+        return [
+            [[0, 1, 2, 3], 4, null],
+            [[0, 1, 2, 3, null], 4, null],
+            [[0, 1, 2, null, 4], 3, null],
+        ];
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerFindInt(): array
+    {
+        return [
+            [[0, 1, 2, 3], 0, null, 0],
+            [[0, 1, 2, 3], 1, null, 1],
+            [[0, 1, 2, 3], 2, null, 2],
+            [[0, 1, 2, 3], 3, null, 3],
+            [[0, 1, 2, 3], 4, null, null],
+            [[0, 1, 2, 3, null], 4, null, null],
+            [[0, 1, 2, null, 4], 3, null, null],
+        ];
+    }
+
+    /**
+     * Test.
+     *
      * @dataProvider providerGetString
      *
      * @param mixed $data The data
