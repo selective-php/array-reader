@@ -283,6 +283,14 @@ final class ArrayReader
      */
     public function find(string $path, $default = null)
     {
+        if (array_key_exists($path, $this->data)) {
+            return $this->data[$path] ?? $default;
+        }
+
+        if (strpos($path, '.') === false) {
+            return $default;
+        }
+
         $pathKeys = explode('.', $path);
 
         $arrayCopyOrValue = $this->data;
