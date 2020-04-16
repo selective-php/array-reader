@@ -16,13 +16,25 @@ final class ArrayReader
     private $data;
 
     /**
-     * Constructor.
+     * The constructor.
      *
      * @param array<mixed> $data Data
      */
     public function __construct(array $data = [])
     {
         $this->data = $data;
+    }
+
+    /**
+     * Crate instance from array.
+     *
+     * @param array $data The data
+     *
+     * @return $this The new instance
+     */
+    public static function createFromArray(array $data = []): self
+    {
+        return new static($data);
     }
 
     /**

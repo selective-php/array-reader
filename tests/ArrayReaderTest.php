@@ -23,6 +23,24 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
+    public function testCreateFromArray($data, string $key, $default, $expected)
+    {
+        $reader = ArrayReader::createFromArray($data);
+        static::assertSame($expected, $reader->getInt($key, $default));
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetInt
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
     public function testGetInt($data, string $key, $default, $expected)
     {
         $reader = new ArrayReader($data);
