@@ -28,7 +28,7 @@ final class ArrayReader
     /**
      * Crate instance from array.
      *
-     * @param array $data The data
+     * @param array<mixed> $data The data
      *
      * @return self The new instance
      */
