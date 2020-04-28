@@ -55,6 +55,7 @@ echo $arrayReader->getString('key1.key2.key3');
 
 * https://github.com/codeliner/array-reader
 * https://github.com/adbario/php-dot-notation
+* https://symfony.com/doc/current/components/property_access.html
 
 ## License
 
