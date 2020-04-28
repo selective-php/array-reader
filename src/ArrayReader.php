@@ -30,7 +30,7 @@ final class ArrayReader
      *
      * @param array $data The data
      *
-     * @return $this The new instance
+     * @return self The new instance
      */
     public static function createFromArray(array $data = []): self
     {
