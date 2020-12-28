@@ -17,13 +17,13 @@ class ArrayReaderTest extends TestCase
      * @dataProvider providerGetInt
      *
      * @param mixed $data The data
-     * @param string $key The lookup key
+     * @param string|int $key The lookup key
      * @param mixed $default The default value
      * @param mixed $expected The expected value
      *
      * @return void
      */
-    public function testCreateFromArray($data, string $key, $default, $expected)
+    public function testCreateFromArray($data, $key, $default, $expected): void
     {
         $reader = ArrayReader::createFromArray($data);
         static::assertSame($expected, $reader->getInt($key, $default));
@@ -35,13 +35,13 @@ class ArrayReaderTest extends TestCase
      * @dataProvider providerGetInt
      *
      * @param mixed $data The data
-     * @param string $key The lookup key
+     * @param string|key $key The lookup key
      * @param mixed $default The default value
      * @param mixed $expected The expected value
      *
      * @return void
      */
-    public function testGetInt($data, string $key, $default, $expected)
+    public function testGetInt($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
         static::assertSame($expected, $reader->getInt($key, $default));
@@ -53,12 +53,12 @@ class ArrayReaderTest extends TestCase
      * @dataProvider providerGetIntError
      *
      * @param mixed $data The data
-     * @param string $key The lookup key
+     * @param string|int $key The lookup key
      * @param mixed $default The default value
      *
      * @return void
      */
-    public function testGetIntError($data, string $key, $default)
+    public function testGetIntError($data, $key, $default): void
     {
         $reader = new ArrayReader($data);
 
@@ -73,13 +73,13 @@ class ArrayReaderTest extends TestCase
      * @dataProvider providerFindInt
      *
      * @param mixed $data The data
-     * @param string $key The lookup key
+     * @param string|int $key The lookup key
      * @param mixed $default The default value
      * @param mixed $expected The expected value
      *
      * @return void
      */
-    public function testFindInt($data, string $key, $default, $expected)
+    public function testFindInt($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
         static::assertSame($expected, $reader->findInt($key, $default));
@@ -144,7 +144,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
-    public function testGetString($data, string $key, $default, $expected)
+    public function testGetString($data, string $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
         static::assertSame($expected, $reader->findString($key, $default));
@@ -177,7 +177,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
-    public function testGetStringError($data, string $key)
+    public function testGetStringError($data, string $key): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -214,7 +214,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
-    public function testFindString($data, string $key, $default, $expected)
+    public function testFindString($data, string $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
         static::assertSame($expected, $reader->findString($key, $default));
@@ -243,13 +243,13 @@ class ArrayReaderTest extends TestCase
      * @dataProvider providerGetArray
      *
      * @param mixed $data The data
-     * @param string $key The lookup key
+     * @param string|int $key The lookup key
      * @param mixed $default The default value
      * @param mixed $expected The expected value
      *
      * @return void
      */
-    public function testGetArray($data, string $key, $default, $expected)
+    public function testGetArray($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
         static::assertSame($expected, $reader->getArray($key, $default));
@@ -276,12 +276,12 @@ class ArrayReaderTest extends TestCase
      * @dataProvider providerGetArrayError
      *
      * @param mixed $data The data
-     * @param string $key The lookup key
+     * @param string|int $key The lookup key
      * @param mixed $default The default value
      *
      * @return void
      */
-    public function testGetArrayError($data, string $key, $default)
+    public function testGetArrayError($data, $key, $default): void
     {
         $reader = new ArrayReader($data);
 
@@ -309,13 +309,13 @@ class ArrayReaderTest extends TestCase
      * @dataProvider providerFindArray
      *
      * @param mixed $data The data
-     * @param string $key The lookup key
+     * @param string|int $key The lookup key
      * @param mixed $default The default value
      * @param mixed $expected The expected value
      *
      * @return void
      */
-    public function testFindArray($data, string $key, $default, $expected)
+    public function testFindArray($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
         static::assertSame($expected, $reader->findArray($key, $default));
