@@ -12,7 +12,7 @@ A strictly typed array reader for PHP.
 
 ## Requirements
 
-* PHP 7.0+ or 8.0+
+* PHP 7.3+ or 8.0+
 
 ## Installation
 
