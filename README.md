@@ -2,17 +2,17 @@
 
 A strictly typed array reader for PHP.
 
-[![Latest Version on Packagist](https://img.shields.io/github/release/selective-php/array-reader.svg?style=flat-square)](https://packagist.org/packages/selective/array-reader)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Build Status](https://github.com/selective-php/array-reader/workflows/PHP/badge.svg)](https://github.com/selective-php/array-reader/actions)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/selective-php/array-reader.svg?style=flat-square)](https://scrutinizer-ci.com/g/selective-php/array-reader/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/quality/g/selective-php/array-reader.svg?style=flat-square)](https://scrutinizer-ci.com/g/selective-php/array-reader/?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/selective/array-reader.svg?style=flat-square)](https://packagist.org/packages/selective/array-reader/stats)
+[![Latest Version on Packagist](https://img.shields.io/github/release/selective-php/array-reader.svg)](https://packagist.org/packages/selective/array-reader)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
+[![Build Status](https://github.com/selective-php/array-reader/workflows/build/badge.svg)](https://github.com/selective-php/array-reader/actions)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/selective-php/array-reader.svg)](https://scrutinizer-ci.com/g/selective-php/array-reader/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/quality/g/selective-php/array-reader.svg)](https://scrutinizer-ci.com/g/selective-php/array-reader/?branch=master)
+[![Total Downloads](https://img.shields.io/packagist/dt/selective/array-reader.svg)](https://packagist.org/packages/selective/array-reader/stats)
 
 
 ## Requirements
 
-* PHP 7.0+
+* PHP 7.0+ or 8.0+
 
 ## Installation
 
