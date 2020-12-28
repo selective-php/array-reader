@@ -26,7 +26,7 @@ class ArrayReaderTest extends TestCase
     public function testCreateFromArray($data, $key, $default, $expected): void
     {
         $reader = ArrayReader::createFromArray($data);
-        static::assertSame($expected, $reader->getInt($key, $default));
+        $this->assertSame($expected, $reader->getInt($key, $default));
     }
 
     /**
@@ -44,7 +44,7 @@ class ArrayReaderTest extends TestCase
     public function testGetInt($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
-        static::assertSame($expected, $reader->getInt($key, $default));
+        $this->assertSame($expected, $reader->getInt($key, $default));
     }
 
     /**
@@ -82,7 +82,7 @@ class ArrayReaderTest extends TestCase
     public function testFindInt($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
-        static::assertSame($expected, $reader->findInt($key, $default));
+        $this->assertSame($expected, $reader->findInt($key, $default));
     }
 
     /**
@@ -147,8 +147,8 @@ class ArrayReaderTest extends TestCase
     public function testGetString($data, string $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
-        static::assertSame($expected, $reader->findString($key, $default));
-        static::assertSame($expected, $reader->getString($key, $default));
+        $this->assertSame($expected, $reader->findString($key, $default));
+        $this->assertSame($expected, $reader->getString($key, $default));
     }
 
     /**
@@ -184,7 +184,7 @@ class ArrayReaderTest extends TestCase
         $reader = new ArrayReader($data);
         $reader->getString($key);
 
-        static::assertTrue(true);
+        $this->assertTrue(true);
     }
 
     /**
@@ -217,7 +217,7 @@ class ArrayReaderTest extends TestCase
     public function testFindString($data, string $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
-        static::assertSame($expected, $reader->findString($key, $default));
+        $this->assertSame($expected, $reader->findString($key, $default));
     }
 
     /**
@@ -252,7 +252,7 @@ class ArrayReaderTest extends TestCase
     public function testGetArray($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
-        static::assertSame($expected, $reader->getArray($key, $default));
+        $this->assertSame($expected, $reader->getArray($key, $default));
     }
 
     /**
@@ -318,7 +318,7 @@ class ArrayReaderTest extends TestCase
     public function testFindArray($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
-        static::assertSame($expected, $reader->findArray($key, $default));
+        $this->assertSame($expected, $reader->findArray($key, $default));
     }
 
     /**
