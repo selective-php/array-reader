@@ -51,6 +51,23 @@ $arrayReader = new ArrayReader([
 echo $arrayReader->getString('key1.key2.key3');
 ```
 
+## Better Code Quality
+
+Converting complex data with simple PHP works by using a lot of type casting and `if` conditions etc.
+This leads to very high cyclomatic complexity and nesting depth, and thus poor "code rating".
+
+**Before**: Conditions: 10, Paths: 512, CRAP Score: 10
+<details>
+  <summary>Click to expand!</summary>
+<img src="https://user-images.githubusercontent.com/781074/109776592-096fcc80-7c03-11eb-95d4-6eef8fe982e2.png">
+</details>
+
+**After**: Conditions: 1, Paths: 1, CRAP Score: 1
+<details>
+  <summary>Click to expand!</summary>
+<img src="https://user-images.githubusercontent.com/781074/109777526-1e992b00-7c04-11eb-8e6b-04d538661f4a.png">
+</details>
+
 ## Similar libraries
 
 * https://github.com/michaelpetri/typed-input
