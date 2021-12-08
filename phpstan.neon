@@ -1,0 +1,8 @@
+parameters:
+	reportUnmatchedIgnoredErrors: false
+	ignoreErrors:
+		- '#Cannot cast mixed to int.#'
+		- '#Cannot cast mixed to string.#'
+		- '#Cannot cast mixed to float.#'
+		- '#Parameter \#1 \$time of class Cake\\Chronos\\Chronos constructor expects DateTimeInterface\|int\|string\|null, mixed given.#'
+		- '#Cannot access offset string on mixed.#'
