@@ -11,14 +11,14 @@ use InvalidArgumentException;
 final class ArrayReader
 {
     /**
-     * @var array<mixed> The data
+     * @var array
      */
-    private $data;
+    private array $data;
 
     /**
      * The constructor.
      *
-     * @param array<mixed> $data Data
+     * @param array $data Data
      */
     public function __construct(array $data = [])
     {
@@ -28,7 +28,7 @@ final class ArrayReader
     /**
      * Crate instance from array.
      *
-     * @param array<mixed> $data The data
+     * @param array $data The data
      *
      * @return self The new instance
      */
@@ -66,7 +66,7 @@ final class ArrayReader
      *
      * @return int|null The value
      */
-    public function findInt(string $key, int $default = null)
+    public function findInt(string $key, int $default = null): ?int
     {
         $value = $this->find($key, $default);
 
@@ -102,11 +102,11 @@ final class ArrayReader
      * Get value as string or null.
      *
      * @param string $key The key
-     * @param string $default The default value
+     * @param string|null $default The default value
      *
      * @return string|null The value
      */
-    public function findString(string $key, string $default = null)
+    public function findString(string $key, string $default = null): ?string
     {
         $value = $this->find($key, $default);
 
@@ -121,11 +121,11 @@ final class ArrayReader
      * Get value as array.
      *
      * @param string $key The key
-     * @param array<mixed>|null $default The default value
+     * @param array|null $default The default value
      *
      * @throws InvalidArgumentException
      *
-     * @return array<mixed> The value
+     * @return array The value
      */
     public function getArray(string $key, array $default = null): array
     {
@@ -142,11 +142,11 @@ final class ArrayReader
      * Get value as array or null.
      *
      * @param string $key The key
-     * @param array<mixed> $default The default value
+     * @param array|null $default The default value
      *
-     * @return array<mixed>|null The value
+     * @return array|null The value
      */
-    public function findArray(string $key, array $default = null)
+    public function findArray(string $key, array $default = null): ?array
     {
         $value = $this->find($key, $default);
 
@@ -182,11 +182,11 @@ final class ArrayReader
      * Get value as float or null.
      *
      * @param string $key The key
-     * @param float $default The default value
+     * @param float|null $default The default value
      *
      * @return float|null The value
      */
-    public function findFloat(string $key, float $default = null)
+    public function findFloat(string $key, float $default = null): ?float
     {
         $value = $this->find($key, $default);
 
@@ -226,7 +226,7 @@ final class ArrayReader
      *
      * @return bool|null The value
      */
-    public function findBool(string $key, bool $default = null)
+    public function findBool(string $key, bool $default = null): ?bool
     {
         $value = $this->find($key, $default);
 
@@ -266,11 +266,11 @@ final class ArrayReader
      * Get value as Chronos or null.
      *
      * @param string $key The key
-     * @param Chronos $default The default value
+     * @param Chronos|null $default The default value
      *
      * @return Chronos|null The value
      */
-    public function findChronos(string $key, Chronos $default = null)
+    public function findChronos(string $key, Chronos $default = null): ?Chronos
     {
         $value = $this->find($key, $default);
 
@@ -293,13 +293,13 @@ final class ArrayReader
      *
      * @return mixed|null The value
      */
-    public function find(string $path, $default = null)
+    public function find(string $path, mixed $default = null): mixed
     {
         if (array_key_exists($path, $this->data)) {
             return $this->data[$path] ?? $default;
         }
 
-        if (strpos($path, '.') === false) {
+        if (!str_contains($path, '.')) {
             return $default;
         }
 
@@ -320,7 +320,7 @@ final class ArrayReader
     /**
      * Return all data as array.
      *
-     * @return array<mixed> The data
+     * @return array The data
      */
     public function all(): array
     {
@@ -328,7 +328,7 @@ final class ArrayReader
     }
 
     /**
-     * Test whether or not a given path exists in $data.
+     * Test whether a given path exists in $data.
      * This method uses the same path syntax as Hash::extract().
      *
      * Checking for paths that could target more than one element will
@@ -373,7 +373,7 @@ final class ArrayReader
      *
      * @return bool The status
      */
-    private function isNullOrBlank($value): bool
+    private function isNullOrBlank(mixed $value): bool
     {
         return $value === null || $value === '';
     }
