@@ -86,6 +86,62 @@ class ArrayReaderTest extends TestCase
     }
 
     /**
+     * Test.
+     *
+     * @dataProvider providerGetFloat
+     *
+     * @param mixed $data The data
+     * @param string|key $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testGetFloat($data, $key, $default, $expected): void
+    {
+        $reader = new ArrayReader($data);
+        $this->assertSame($expected, $reader->getFloat($key, $default));
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetFloatError
+     *
+     * @param mixed $data The data
+     * @param string|int $key The lookup key
+     * @param mixed $default The default value
+     *
+     * @return void
+     */
+    public function testGetFloatError($data, $key, $default): void
+    {
+        $reader = new ArrayReader($data);
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $reader->getFloat($key, $default);
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerFindFloat
+     *
+     * @param mixed $data The data
+     * @param string|int $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testFindFloat($data, $key, $default, $expected): void
+    {
+        $reader = new ArrayReader($data);
+        $this->assertSame($expected, $reader->findFloat($key, $default));
+    }
+
+    /**
      * Provider.
      *
      * @return array[] The test data
@@ -129,6 +185,53 @@ class ArrayReaderTest extends TestCase
             [[0, 1, 2, 3], 4, null, null],
             [[0, 1, 2, 3, null], 4, null, null],
             [[0, 1, 2, null, 4], 3, null, null],
+        ];
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetFloat(): array
+    {
+        return [
+            [[0.1, 1.2, 2.3, 3.4], 0, null, 0.1],
+            [[0.1, 1.2, 2.3, 3.4], 1, null, 1.2],
+            [[0.1, 1.2, 2.3, 3.4], 2, null, 2.3],
+            [[0.1, 1.2, 2.3, 3.4], 3, null, 3.4],
+        ];
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetFloatError(): array
+    {
+        return [
+            [[0.1, 1.2, 2.3, 3.4], 4, null],
+            [[0.1, 1.2, 2.3, 3.4, null], 4, null],
+            [[0.1, 1.2, 2.3, null, 4.4], 3, null],
+        ];
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerFindFloat(): array
+    {
+        return [
+            [[0.1, 1.2, 2.3, 3.4], 0, null, 0.1],
+            [[0.1, 1.2, 2.3, 3.4], 1, null, 1.2],
+            [[0.1, 1.2, 2.3, 3.4], 2, null, 2.3],
+            [[0.1, 1.2, 2.3, 3.4], 3, null, 3.4],
+            [[0.1, 1.2, 2.3, 3.4], 4, null, null],
+            [[0.1, 1.2, 2.3, 3.4, null], 4, null, null],
+            [[0.1, 1.2, 2.3, null, 4.4], 3, null, null],
         ];
     }
 
