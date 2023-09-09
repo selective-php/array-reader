@@ -36,7 +36,7 @@ build:
             - composer install --no-interaction --prefer-dist --no-progress
     tests:
         before:
-            - command: composer test:coverage
-              coverage:
-                  file: 'build/logs/clover.xml'
-                  format: 'clover'
+            -   command: composer test:coverage
+                coverage:
+                    file: 'build/logs/clover.xml'
+                    format: 'clover'

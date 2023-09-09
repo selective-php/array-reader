@@ -146,7 +146,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerGetInt(): array
+    public static function providerGetInt(): array
     {
         return [
             [[0, 1, 2, 3], 0, null, 0],
@@ -161,7 +161,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerGetIntError(): array
+    public static function providerGetIntError(): array
     {
         return [
             [[0, 1, 2, 3], 4, null],
@@ -175,7 +175,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerFindInt(): array
+    public static function providerFindInt(): array
     {
         return [
             [[0, 1, 2, 3], 0, null, 0],
@@ -193,7 +193,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerGetFloat(): array
+    public static function providerGetFloat(): array
     {
         return [
             [[0.1, 1.2, 2.3, 3.4], 0, null, 0.1],
@@ -208,7 +208,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerGetFloatError(): array
+    public static function providerGetFloatError(): array
     {
         return [
             [[0.1, 1.2, 2.3, 3.4], 4, null],
@@ -222,7 +222,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerFindFloat(): array
+    public static function providerFindFloat(): array
     {
         return [
             [[0.1, 1.2, 2.3, 3.4], 0, null, 0.1],
@@ -259,7 +259,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerGetString(): array
+    public static function providerGetString(): array
     {
         return [
             [['key' => 'value'], 'key', null, 'value'],
@@ -295,7 +295,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerGetStringError(): array
+    public static function providerGetStringError(): array
     {
         return [
             [['key' => 'value'], 'nope'],
@@ -328,7 +328,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerFindString(): array
+    public static function providerFindString(): array
     {
         return [
             [['key' => 'value'], 'key', null, 'value'],
@@ -363,7 +363,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerGetArray(): array
+    public static function providerGetArray(): array
     {
         return [
             [[[1, 2, 3, 4], [2, 3, 4, 5, 6]], 0, null, [1, 2, 3, 4]],
@@ -398,7 +398,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerGetArrayError(): array
+    public static function providerGetArrayError(): array
     {
         return [
             [[[1, 2, 3, 4], [2, 3, 4, 5, 6]], 2, null],
@@ -429,7 +429,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return array[] The test data
      */
-    public function providerFindArray(): array
+    public static function providerFindArray(): array
     {
         return [
             [[[1, 2, 3, 4], [2, 3, 4, 5, 6]], 0, null, [1, 2, 3, 4]],

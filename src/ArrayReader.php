@@ -11,14 +11,14 @@ use InvalidArgumentException;
 final class ArrayReader
 {
     /**
-     * @var array
+     * @var array<mixed>
      */
     private array $data;
 
     /**
      * The constructor.
      *
-     * @param array $data Data
+     * @param array<mixed> $data Data
      */
     public function __construct(array $data = [])
     {
@@ -28,7 +28,7 @@ final class ArrayReader
     /**
      * Crate instance from array.
      *
-     * @param array $data The data
+     * @param array<mixed> $data The data
      *
      * @return self The new instance
      */
@@ -121,11 +121,11 @@ final class ArrayReader
      * Get value as array.
      *
      * @param string $key The key
-     * @param array|null $default The default value
+     * @param array<mixed>|null $default The default value
      *
      * @throws InvalidArgumentException
      *
-     * @return array The value
+     * @return array<mixed> The value
      */
     public function getArray(string $key, array $default = null): array
     {
@@ -142,9 +142,9 @@ final class ArrayReader
      * Get value as array or null.
      *
      * @param string $key The key
-     * @param array|null $default The default value
+     * @param array<mixed>|null $default The default value
      *
-     * @return array|null The value
+     * @return array<mixed>|null The value
      */
     public function findArray(string $key, array $default = null): ?array
     {
@@ -320,7 +320,7 @@ final class ArrayReader
     /**
      * Return all data as array.
      *
-     * @return array The data
+     * @return array<mixed> The data
      */
     public function all(): array
     {
