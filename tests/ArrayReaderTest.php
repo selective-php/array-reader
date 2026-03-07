@@ -3,6 +3,7 @@
 namespace Selective\ArrayReader\Test;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Selective\ArrayReader\ArrayReader;
 
@@ -14,8 +15,6 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerGetInt
-     *
      * @param mixed $data The data
      * @param string|int $key The lookup key
      * @param mixed $default The default value
@@ -23,6 +22,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
+    #[DataProvider('providerGetInt')]
     public function testCreateFromArray($data, $key, $default, $expected): void
     {
         $reader = ArrayReader::createFromArray($data);
@@ -32,8 +32,6 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerGetInt
-     *
      * @param mixed $data The data
      * @param string|key $key The lookup key
      * @param mixed $default The default value
@@ -41,6 +39,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
+    #[DataProvider('providerGetInt')]
     public function testGetInt($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
@@ -50,14 +49,13 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerGetIntError
-     *
      * @param mixed $data The data
      * @param string|int $key The lookup key
      * @param mixed $default The default value
      *
      * @return void
      */
+    #[DataProvider('providerGetIntError')]
     public function testGetIntError($data, $key, $default): void
     {
         $reader = new ArrayReader($data);
@@ -70,8 +68,6 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerFindInt
-     *
      * @param mixed $data The data
      * @param string|int $key The lookup key
      * @param mixed $default The default value
@@ -79,6 +75,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
+    #[DataProvider('providerFindInt')]
     public function testFindInt($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
@@ -88,8 +85,6 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerGetFloat
-     *
      * @param mixed $data The data
      * @param string|key $key The lookup key
      * @param mixed $default The default value
@@ -97,6 +92,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
+    #[DataProvider('providerGetFloat')]
     public function testGetFloat($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
@@ -106,14 +102,13 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerGetFloatError
-     *
      * @param mixed $data The data
      * @param string|int $key The lookup key
      * @param mixed $default The default value
      *
      * @return void
      */
+    #[DataProvider('providerGetFloatError')]
     public function testGetFloatError($data, $key, $default): void
     {
         $reader = new ArrayReader($data);
@@ -126,8 +121,6 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerFindFloat
-     *
      * @param mixed $data The data
      * @param string|int $key The lookup key
      * @param mixed $default The default value
@@ -135,6 +128,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
+    #[DataProvider('providerFindFloat')]
     public function testFindFloat($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
@@ -238,8 +232,6 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerGetString
-     *
      * @param mixed $data The data
      * @param string $key The lookup key
      * @param mixed $default The default value
@@ -247,6 +239,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
+    #[DataProvider('providerGetString')]
     public function testGetString($data, string $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
@@ -273,13 +266,12 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerGetStringError
-     *
      * @param mixed $data The data
      * @param string $key The lookup key
      *
      * @return void
      */
+    #[DataProvider('providerGetStringError')]
     public function testGetStringError($data, string $key): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -308,8 +300,6 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerFindString
-     *
      * @param mixed $data The data
      * @param string $key The lookup key
      * @param mixed $default The default value
@@ -317,6 +307,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
+    #[DataProvider('providerFindString')]
     public function testFindString($data, string $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
@@ -343,8 +334,6 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerGetArray
-     *
      * @param mixed $data The data
      * @param string|int $key The lookup key
      * @param mixed $default The default value
@@ -352,6 +341,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
+    #[DataProvider('providerGetArray')]
     public function testGetArray($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
@@ -376,14 +366,13 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerGetArrayError
-     *
      * @param mixed $data The data
      * @param string|int $key The lookup key
      * @param mixed $default The default value
      *
      * @return void
      */
+    #[DataProvider('providerGetArrayError')]
     public function testGetArrayError($data, $key, $default): void
     {
         $reader = new ArrayReader($data);
@@ -409,8 +398,6 @@ class ArrayReaderTest extends TestCase
     /**
      * Test.
      *
-     * @dataProvider providerFindArray
-     *
      * @param mixed $data The data
      * @param string|int $key The lookup key
      * @param mixed $default The default value
@@ -418,6 +405,7 @@ class ArrayReaderTest extends TestCase
      *
      * @return void
      */
+    #[DataProvider('providerFindArray')]
     public function testFindArray($data, $key, $default, $expected): void
     {
         $reader = new ArrayReader($data);
