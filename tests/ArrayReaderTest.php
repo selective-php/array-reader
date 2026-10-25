@@ -460,6 +460,7 @@ class ArrayReaderTest extends TestCase
     public static function providerGetDateTime(): array
     {
         $date = new DateTimeImmutable('2020-01-02T03:04:05+00:00');
+        $fraction = new DateTimeImmutable('2020-01-02T03:04:05.500000+00:00');
         $chronos = new Chronos('2020-01-02T03:04:05+00:00');
 
         return [
@@ -467,6 +468,7 @@ class ArrayReaderTest extends TestCase
             [['created' => $date], 'created', null, $date],
             [['created' => new DateTime('2020-01-02T03:04:05+00:00')], 'created', null, $date],
             [['created' => 1577934245], 'created', null, $date],
+            [['created' => 1577934245.5], 'created', null, $fraction],
             [['user' => ['created' => '2020-01-02T03:04:05+00:00']], 'user.created', null, $date],
             [['created' => $chronos], 'created', null, $chronos],
             [[], 'missing', $date, $date],
@@ -505,6 +507,8 @@ class ArrayReaderTest extends TestCase
             [['created' => ''], 'created', null],
             [[], 'missing', null],
             [['created' => ['not-a-date']], 'created', null],
+            [['created' => INF], 'created', null],
+            [['created' => NAN], 'created', null],
             [['user' => ['created' => null]], 'user.created', null],
         ];
     }

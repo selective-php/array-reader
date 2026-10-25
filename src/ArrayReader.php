@@ -440,8 +440,8 @@ final class ArrayReader
             return DateTimeImmutable::createFromInterface($value);
         }
 
-        if (is_int($value)) {
-            return new DateTimeImmutable('@' . $value);
+        if (is_int($value) || (is_float($value) && is_finite($value))) {
+            return DateTimeImmutable::createFromTimestamp($value);
         }
 
         if (!is_string($value)) {

@@ -13,7 +13,7 @@
     ],
     "homepage": "https://github.com/selective-php/array-reader",
     "require": {
-        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
+        "php": "~8.4.0 || ~8.5.0"
     },
     "require-dev": {
         "cakephp/chronos": "^2 || ^3",
