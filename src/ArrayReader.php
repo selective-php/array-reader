@@ -3,6 +3,8 @@
 namespace Selective\ArrayReader;
 
 use Cake\Chronos\Chronos;
+use DateTimeImmutable;
+use DateTimeInterface;
 use InvalidArgumentException;
 
 /**
@@ -238,6 +240,46 @@ final class ArrayReader
     }
 
     /**
+     * Get value as DateTimeImmutable.
+     *
+     * @param string $key The key
+     * @param DateTimeImmutable|null $default The default value
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return DateTimeImmutable The value
+     */
+    public function getDateTime(string $key, ?DateTimeImmutable $default = null): DateTimeImmutable
+    {
+        $value = $this->find($key, $default);
+
+        if ($this->isNullOrBlank($value)) {
+            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
+        }
+
+        return $this->toDateTimeImmutable($key, $value);
+    }
+
+    /**
+     * Get value as DateTimeImmutable or null.
+     *
+     * @param string $key The key
+     * @param DateTimeImmutable|null $default The default value
+     *
+     * @return DateTimeImmutable|null The value
+     */
+    public function findDateTime(string $key, ?DateTimeImmutable $default = null): ?DateTimeImmutable
+    {
+        $value = $this->find($key, $default);
+
+        if ($this->isNullOrBlank($value)) {
+            return null;
+        }
+
+        return $this->toDateTimeImmutable($key, $value);
+    }
+
+    /**
      * Get value as Chronos.
      *
      * @param string $key The key
@@ -376,5 +418,36 @@ final class ArrayReader
     private function isNullOrBlank(mixed $value): bool
     {
         return $value === null || $value === '';
+    }
+
+    /**
+     * Cast a value to DateTimeImmutable.
+     *
+     * @param string $key The key
+     * @param mixed $value The value
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return DateTimeImmutable The date
+     */
+    private function toDateTimeImmutable(string $key, mixed $value): DateTimeImmutable
+    {
+        if ($value instanceof DateTimeImmutable) {
+            return $value;
+        }
+
+        if ($value instanceof DateTimeInterface) {
+            return DateTimeImmutable::createFromInterface($value);
+        }
+
+        if (is_int($value)) {
+            return new DateTimeImmutable('@' . $value);
+        }
+
+        if (!is_string($value)) {
+            throw new InvalidArgumentException(sprintf('Invalid date value for key "%s"', $key));
+        }
+
+        return new DateTimeImmutable($value);
     }
 }

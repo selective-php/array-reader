@@ -2,6 +2,9 @@
 
 namespace Selective\ArrayReader\Test;
 
+use Cake\Chronos\Chronos;
+use DateTime;
+use DateTimeImmutable;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -427,6 +430,122 @@ class ArrayReaderTest extends TestCase
             [[['key' => 'value'], ['key2' => 'value2']], 0, null, ['key' => 'value']],
             [[['key' => 'value'], ['key2' => 'value2']], 1, null, ['key2' => 'value2']],
             [[['key' => 'value'], ['key2' => 'value2']], 2, null, null],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    #[DataProvider('providerGetDateTime')]
+    public function testGetDateTime($data, string $key, $default, $expected): void
+    {
+        $reader = new ArrayReader($data);
+
+        $this->assertEquals($expected, $reader->findDateTime($key, $default));
+        $this->assertEquals($expected, $reader->getDateTime($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public static function providerGetDateTime(): array
+    {
+        $date = new DateTimeImmutable('2020-01-02T03:04:05+00:00');
+        $chronos = new Chronos('2020-01-02T03:04:05+00:00');
+
+        return [
+            [['created' => '2020-01-02T03:04:05+00:00'], 'created', null, $date],
+            [['created' => $date], 'created', null, $date],
+            [['created' => new DateTime('2020-01-02T03:04:05+00:00')], 'created', null, $date],
+            [['created' => 1577934245], 'created', null, $date],
+            [['user' => ['created' => '2020-01-02T03:04:05+00:00']], 'user.created', null, $date],
+            [['created' => $chronos], 'created', null, $chronos],
+            [[], 'missing', $date, $date],
+            [['created' => null], 'created', $date, $date],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     *
+     * @return void
+     */
+    #[DataProvider('providerGetDateTimeError')]
+    public function testGetDateTimeError($data, string $key, $default): void
+    {
+        $reader = new ArrayReader($data);
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $reader->getDateTime($key, $default);
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public static function providerGetDateTimeError(): array
+    {
+        return [
+            [['created' => null], 'created', null],
+            [['created' => ''], 'created', null],
+            [[], 'missing', null],
+            [['created' => ['not-a-date']], 'created', null],
+            [['user' => ['created' => null]], 'user.created', null],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    #[DataProvider('providerFindDateTime')]
+    public function testFindDateTime($data, string $key, $default, $expected): void
+    {
+        $reader = new ArrayReader($data);
+
+        $this->assertEquals($expected, $reader->findDateTime($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public static function providerFindDateTime(): array
+    {
+        $date = new DateTimeImmutable('2020-01-02T03:04:05+00:00');
+
+        return [
+            [['created' => '2020-01-02T03:04:05+00:00'], 'created', null, $date],
+            [['created' => null], 'created', null, null],
+            [['created' => ''], 'created', null, null],
+            [['created' => ''], 'created', $date, null],
+            [[], 'missing', null, null],
+            [[], 'missing', $date, $date],
+            [['created' => null], 'created', $date, $date],
+            [['user' => ['created' => '2020-01-02T03:04:05+00:00']], 'user.created', null, $date],
+            [['user' => ['created' => null]], 'user.created', null, null],
         ];
     }
 }
