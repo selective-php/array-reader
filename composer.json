@@ -13,14 +13,17 @@
     ],
     "homepage": "https://github.com/selective-php/array-reader",
     "require": {
-        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
-        "cakephp/chronos": "^2 || ^3"
+        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
     },
     "require-dev": {
+        "cakephp/chronos": "^2 || ^3",
         "friendsofphp/php-cs-fixer": "^3",
         "phpstan/phpstan": "^1 || ^2",
         "phpunit/phpunit": "^11",
         "squizlabs/php_codesniffer": "^3"
+    },
+    "suggest": {
+        "cakephp/chronos": "Required to use ArrayReader::getChronos() and ArrayReader::findChronos()"
     },
     "autoload": {
         "psr-4": {
